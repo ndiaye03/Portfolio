@@ -1,17 +1,19 @@
 /**
- * JS/main.js
+ * JS/main.js — Version améliorée
+ * Portfolio de Papa Aly Ndiaye
  * ─────────────────────────────────────────────────────────────
- * Script principal du portfolio de Papa Aly Ndiaye.
  * Modules :
- *   1. Thème clair / sombre
- *   2. Barre de lecture
- *   3. Navbar scrollspy + burger
- *   4. Effet machine-à-écrire (typewriter)
- *   5. Génération des cartes de compétences
- *   6. Animations d'apparition (IntersectionObserver)
- *   7. Barres de progression compétences
- *   8. Génération des cartes projets
- *   9. Modale projet (carrousel, clavier, touch)
+ *   1.  Thème clair / sombre
+ *   2.  Barre de lecture
+ *   3.  Navbar scrollspy + burger
+ *   4.  Typewriter (phrases mises à jour)
+ *   5.  Compteurs animés Hero
+ *   6.  Génération des compétences (niveaux Notions/Inter/Avancé)
+ *   7.  Animations d'apparition (IntersectionObserver)
+ *   8.  Barres de progression – rejouées à CHAQUE chargement
+ *   9.  Génération des cartes projets (placeholder soigné)
+ *   10. Modale projet (4 blocs + carrousel complet)
+ *   11. Halo lumineux souris (désactivé sur mobile)
  * ─────────────────────────────────────────────────────────────
  */
 
@@ -19,7 +21,6 @@
    1. THÈME CLAIR / SOMBRE
 ══════════════════════════════════════════ */
 (function initTheme() {
-  // Lire la préférence sauvegardée (ou la préférence système)
   const saved = localStorage.getItem('portfolio-theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const theme = saved || (prefersDark ? 'dark' : 'light');
@@ -29,18 +30,17 @@
   if (!btn) return;
 
   function updateIcon() {
-    const current = document.documentElement.getAttribute('data-theme');
-    btn.innerHTML = current === 'dark'
+    const c = document.documentElement.getAttribute('data-theme');
+    btn.innerHTML = c === 'dark'
       ? '<i class="fas fa-sun" aria-hidden="true"></i>'
       : '<i class="fas fa-moon" aria-hidden="true"></i>';
-    btn.setAttribute('aria-label', current === 'dark' ? 'Passer au thème clair' : 'Passer au thème sombre');
+    btn.setAttribute('aria-label', c === 'dark' ? 'Passer au thème clair' : 'Passer au thème sombre');
   }
 
   updateIcon();
-
   btn.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
+    const c = document.documentElement.getAttribute('data-theme');
+    const next = c === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('portfolio-theme', next);
     updateIcon();
@@ -53,71 +53,49 @@
 (function initReadingProgress() {
   const bar = document.getElementById('reading-progress');
   if (!bar) return;
-
-  function updateProgress() {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    bar.style.width = pct.toFixed(1) + '%';
+  function update() {
+    const st = window.scrollY;
+    const dh = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (dh > 0 ? (st / dh) * 100 : 0).toFixed(1) + '%';
   }
-
-  window.addEventListener('scroll', updateProgress, { passive: true });
-  updateProgress();
+  window.addEventListener('scroll', update, { passive: true });
+  update();
 })();
 
 /* ══════════════════════════════════════════
    3. NAVBAR — Scrollspy + scroll + burger
 ══════════════════════════════════════════ */
 (function initNavbar() {
-  const navbar   = document.getElementById('navbar');
-  const navLinks = document.querySelectorAll('.nav-links a, .nav-mobile a');
-  const burger   = document.querySelector('.nav-burger');
+  const navbar     = document.getElementById('navbar');
+  const navLinks   = document.querySelectorAll('.nav-links a, .nav-mobile a');
+  const burger     = document.querySelector('.nav-burger');
   const mobileMenu = document.querySelector('.nav-mobile');
-  const sections = document.querySelectorAll('section[id]');
+  const sections   = document.querySelectorAll('section[id]');
 
-  // Scroll : fond renforcé
   function onScroll() {
-    if (window.scrollY > 60) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
     updateActiveLink();
   }
-
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // Scrollspy
   function updateActiveLink() {
     let current = '';
-    sections.forEach(section => {
-      const top = section.getBoundingClientRect().top;
-      if (top <= 100) current = section.id;
+    sections.forEach(s => {
+      if (s.getBoundingClientRect().top <= 100) current = s.id;
     });
-
-    navLinks.forEach(link => {
-      link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
-    });
+    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === `#${current}`));
   }
 
-  // Défilement doux sur clic
   navLinks.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
       const target = document.querySelector(link.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-      // Fermer le menu mobile
-      if (mobileMenu) {
-        mobileMenu.classList.remove('open');
-        burger && burger.classList.remove('open');
-      }
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (mobileMenu) { mobileMenu.classList.remove('open'); burger && burger.classList.remove('open'); }
     });
   });
 
-  // Burger
   if (burger && mobileMenu) {
     burger.addEventListener('click', () => {
       const isOpen = mobileMenu.classList.toggle('open');
@@ -128,26 +106,20 @@
 })();
 
 /* ══════════════════════════════════════════
-   4. EFFET MACHINE À ÉCRIRE
+   4. TYPEWRITER — 3 phrases demandées
 ══════════════════════════════════════════ */
 (function initTypewriter() {
   const el = document.querySelector('.typewriter-text');
   if (!el) return;
 
   const phrases = [
-    'Développeur Full-Stack',
-    'Passionné par l\'IA',
-    'Étudiant en L3 Génie Logiciel',
-    'Explorateur de la Data'
+    'Étudiant en Génie logiciel',
+    'Développeur full-stack',
+    'Futur ingénieur IA et données'
   ];
 
-  let pIdx = 0;
-  let cIdx = 0;
-  let deleting = false;
-  const SPEED_TYPE = 70;
-  const SPEED_DELETE = 40;
-  const PAUSE_END = 1800;
-  const PAUSE_START = 400;
+  let pIdx = 0, cIdx = 0, deleting = false;
+  const SPEED_TYPE = 70, SPEED_DELETE = 38, PAUSE_END = 1900, PAUSE_START = 420;
 
   function tick() {
     const phrase = phrases[pIdx];
@@ -157,32 +129,70 @@
       if (cIdx === 0) {
         deleting = false;
         pIdx = (pIdx + 1) % phrases.length;
-        setTimeout(tick, PAUSE_START);
-        return;
+        return setTimeout(tick, PAUSE_START);
       }
-      setTimeout(tick, SPEED_DELETE);
-    } else {
-      el.textContent = phrase.substring(0, cIdx + 1);
-      cIdx++;
-      if (cIdx === phrase.length) {
-        deleting = true;
-        setTimeout(tick, PAUSE_END);
-        return;
-      }
-      setTimeout(tick, SPEED_TYPE);
+      return setTimeout(tick, SPEED_DELETE);
     }
+    el.textContent = phrase.substring(0, cIdx + 1);
+    cIdx++;
+    if (cIdx === phrase.length) {
+      deleting = true;
+      return setTimeout(tick, PAUSE_END);
+    }
+    setTimeout(tick, SPEED_TYPE);
   }
-
   tick();
 })();
 
 /* ══════════════════════════════════════════
-   5. GÉNÉRATION DES COMPÉTENCES
+   5. COMPTEURS ANIMÉS HERO
 ══════════════════════════════════════════ */
+(function initHeroCounters() {
+  const counters = document.querySelectorAll('.hero-stat-num');
+  if (!counters.length) return;
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el    = entry.target;
+      const target = parseInt(el.dataset.target, 10);
+      const dur   = 1200;
+      const step  = 16;
+      let cur = 0;
+      const inc = target / (dur / step);
+      const timer = setInterval(() => {
+        cur = Math.min(cur + inc, target);
+        el.textContent = Math.round(cur);
+        if (cur >= target) clearInterval(timer);
+      }, step);
+      obs.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(c => obs.observe(c));
+})();
+
+/* ══════════════════════════════════════════
+   6. GÉNÉRATION DES COMPÉTENCES
+      Niveaux : Notions (0-39) | Intermédiaire (40-69) | Avancé (70-100)
+══════════════════════════════════════════ */
+function levelLabel(n) {
+  if (n >= 70) return { label: 'Avancé',        cls: 'lvl-advanced' };
+  if (n >= 40) return { label: 'Intermédiaire', cls: 'lvl-intermediate' };
+  return              { label: 'Notions',        cls: 'lvl-beginner' };
+}
+
+/** SVG inline pour UML (aucune icône Devicon disponible) */
+const UML_SVG = `<svg class="skill-icon-uml-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+  <rect x="2" y="2" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M6 9l3-3 3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M12 20v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M8 20h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+</svg>`;
+
 function buildSkills() {
   const container = document.getElementById('skills-container');
   if (!container || typeof skillsData === 'undefined') return;
-
   container.innerHTML = '';
 
   skillsData.forEach(cat => {
@@ -195,20 +205,28 @@ function buildSkills() {
     card.appendChild(title);
 
     cat.skills.forEach(skill => {
+      const { label, cls } = levelLabel(skill.level);
+      const isUML = skill.iconClass === 'skill-icon-uml';
+      const iconHtml = isUML
+        ? UML_SVG
+        : `<i class="${skill.iconClass}" aria-hidden="true" title="${skill.name}"></i>`;
+
       const item = document.createElement('div');
       item.className = 'skill-item';
+      item.setAttribute('data-tooltip', skill.usedIn ? `Utilisé dans : ${skill.usedIn}` : '');
 
       item.innerHTML = `
         <div class="skill-header">
           <div class="skill-name-wrap">
-            <i class="${skill.iconClass}" aria-hidden="true" title="${skill.name}"></i>
+            ${iconHtml}
             <span class="skill-name">${skill.name}</span>
           </div>
-          <span class="skill-pct" aria-label="${skill.level} pourcent">0%</span>
+          <span class="skill-level-badge ${cls}">${label}</span>
         </div>
-        <div class="skill-bar-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="${skill.name}">
-          <div class="skill-bar-fill" data-level="${skill.level}"></div>
+        <div class="skill-bar-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="${skill.name} – ${label}">
+          <div class="skill-bar-fill ${cls}-bar" data-level="${skill.level}"></div>
         </div>
+        ${skill.usedIn ? `<div class="skill-tooltip"><i class="fas fa-folder-open" aria-hidden="true"></i> ${skill.usedIn}</div>` : ''}
       `;
       card.appendChild(item);
     });
@@ -218,89 +236,63 @@ function buildSkills() {
 }
 
 /* ══════════════════════════════════════════
-   6. ANIMATIONS D'APPARITION (IntersectionObserver)
+   7. ANIMATIONS D'APPARITION
 ══════════════════════════════════════════ */
 (function initReveal() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.12 });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
 
-  // Sera réappliqué après construction du DOM
   function observeAll() {
-    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .timeline-item, .project-card').forEach(el => {
-      observer.observe(el);
-    });
+    document.querySelectorAll(
+      '.reveal, .reveal-left, .reveal-right, .timeline-item, .project-card'
+    ).forEach(el => obs.observe(el));
   }
 
-  // Après construction complète
   window.addEventListener('load', observeAll);
-  document.addEventListener('DOMContentLoaded', () => setTimeout(observeAll, 100));
+  document.addEventListener('DOMContentLoaded', () => setTimeout(observeAll, 80));
 })();
 
 /* ══════════════════════════════════════════
-   7. BARRES DE PROGRESSION — se remplissent à CHAQUE chargement
-      (aucun cache localStorage, déclenchées par IntersectionObserver)
+   8. BARRES DE PROGRESSION — rejouées à CHAQUE chargement
+      (aucun cache localStorage)
 ══════════════════════════════════════════ */
 (function initSkillBars() {
   const skillsSection = document.getElementById('skills');
   if (!skillsSection) return;
 
-  // On ne mémorise rien : animated = false à chaque page load
+  // `animated` = false à chaque chargement de page → toujours rejoué
   let animated = false;
 
-  const obs = new IntersectionObserver((entries) => {
+  const obs = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting && !animated) {
       animated = true;
       animateBars();
     }
-  }, { threshold: 0.15 });
+  }, { threshold: 0.1 });
 
   obs.observe(skillsSection);
 
   function animateBars() {
-    const bars = document.querySelectorAll('.skill-bar-fill');
-    bars.forEach((bar, i) => {
+    document.querySelectorAll('.skill-bar-fill').forEach((bar, i) => {
       const level = parseInt(bar.dataset.level, 10) || 0;
-      const pctEl = bar.closest('.skill-item')?.querySelector('.skill-pct');
       const track = bar.closest('.skill-bar-track');
 
-      // Délai en cascade léger
       setTimeout(() => {
         bar.style.width = level + '%';
-
-        if (track) {
-          track.setAttribute('aria-valuenow', level);
-        }
-
-        // Compteur animé
-        if (pctEl) {
-          let start = 0;
-          const duration = 900;
-          const step = 16;
-          const increment = level / (duration / step);
-
-          const counter = setInterval(() => {
-            start = Math.min(start + increment, level);
-            pctEl.textContent = Math.round(start) + '%';
-            if (start >= level) clearInterval(counter);
-          }, step);
-        }
-      }, i * 60);
+        if (track) track.setAttribute('aria-valuenow', level);
+      }, i * 55);
     });
   }
 })();
 
 /* ══════════════════════════════════════════
-   8. GÉNÉRATION DES PROJETS
+   9. GÉNÉRATION DES PROJETS
+      Placeholder soigné avec nom + techs
 ══════════════════════════════════════════ */
 function buildProjects() {
   const grid = document.getElementById('projects-grid');
   if (!grid || typeof projectsData === 'undefined') return;
-
   grid.innerHTML = '';
 
   projectsData.forEach((project, idx) => {
@@ -309,21 +301,23 @@ function buildProjects() {
     card.setAttribute('tabindex', '0');
     card.setAttribute('role', 'button');
     card.setAttribute('aria-label', `Voir le projet ${project.title}`);
-    // Délai d'apparition en cascade
-    card.style.transitionDelay = `${idx * 0.1}s`;
+    card.style.transitionDelay = `${idx * 0.08}s`;
 
-    // Image principale (première du tableau ou placeholder)
-    const thumbHtml = project.images.length > 0
-      ? `<img src="${encodeProjectPath(project.images[0])}" alt="Aperçu de ${project.title}" loading="lazy">`
-      : `<div class="project-thumb-placeholder">
-           <i class="fas fa-code" aria-hidden="true"></i>
-           <span>Aperçu à venir</span>
-         </div>`;
+    // Image principale ou placeholder soigné
+    const hasImages = project.images && project.images.length > 0;
+    const techList = (project.cardTechnologies || project.technologies || [])
+      .map(t => `<span>${t}</span>`).join('');
+
+    const thumbHtml = hasImages
+      ? `<img src="${encodeProjectPath(project.images[0])}"
+              alt="Aperçu de ${project.title}"
+              loading="lazy"
+              onerror="this.parentNode.innerHTML=buildPlaceholder('${project.title.replace(/'/g, "\\'")}','${(project.cardTechnologies||[]).join(',')}');">`
+      : buildPlaceholderHTML(project.title, project.cardTechnologies || []);
 
     const statusClass = project.status === 'En cours' ? 'badge-ongoing' : 'badge-done';
-    const techBadges = project.technologies.map(t =>
-      `<span class="tech-badge">${t}</span>`
-    ).join('');
+    const techBadges  = (project.cardTechnologies || project.technologies || [])
+      .map(t => `<span class="tech-badge">${t}</span>`).join('');
 
     card.innerHTML = `
       <div class="project-thumb">
@@ -341,61 +335,57 @@ function buildProjects() {
       </div>
     `;
 
-    // Ouvrir la modale au clic ou à la touche Entrée
-    function openModal() { showProjectModal(project); }
-    card.addEventListener('click', openModal);
+    function open() { showProjectModal(project); }
+    card.addEventListener('click', open);
     card.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openModal();
-      }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
     });
-
     grid.appendChild(card);
   });
 
-  // Re-observer les nouvelles cartes
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold: 0.1 });
-
-  grid.querySelectorAll('.project-card').forEach(c => observer.observe(c));
+  // Observer les cartes
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  grid.querySelectorAll('.project-card').forEach(c => obs.observe(c));
 }
 
-/** Encode les espaces dans les chemins de fichiers */
+/** Placeholder soigné : dégradé + nom + techs */
+function buildPlaceholderHTML(title, techs) {
+  const list = techs.map(t => `<span>${t}</span>`).join('');
+  return `<div class="project-thumb-placeholder" aria-label="Aperçu du projet ${title}">
+    <div class="placeholder-icon"><i class="fas fa-layer-group" aria-hidden="true"></i></div>
+    <div class="placeholder-title">${title}</div>
+    <div class="placeholder-techs">${list}</div>
+  </div>`;
+}
+
+// Version appelable depuis onerror (inline)
+window.buildPlaceholder = function(title, techsStr) {
+  const techs = techsStr ? techsStr.split(',') : [];
+  return buildPlaceholderHTML(title, techs);
+};
+
 function encodeProjectPath(path) {
-  return path.split('/').map(segment => encodeURIComponent(segment)).join('/');
+  return path.split('/').map(s => encodeURIComponent(s)).join('/');
 }
 
 /* ══════════════════════════════════════════
-   9. MODALE PROJET
+   10. MODALE PROJET — 4 blocs + carrousel
 ══════════════════════════════════════════ */
 (function initModal() {
-  const overlay    = document.getElementById('project-modal');
-  const closeBtn   = document.getElementById('modal-close-btn');
-  const track      = document.getElementById('carousel-track');
-  const dots       = document.getElementById('carousel-dots');
-  const counter    = document.getElementById('carousel-counter');
-  const prevBtn    = document.getElementById('carousel-prev');
-  const nextBtn    = document.getElementById('carousel-next');
-  const modalTitle = document.getElementById('modal-title');
-  const modalMeta  = document.getElementById('modal-meta');
-  const modalDesc  = document.getElementById('modal-description');
-  const modalKeys  = document.getElementById('modal-keypoints');
-  const modalTech  = document.getElementById('modal-technologies');
-  const modalGh    = document.getElementById('modal-github-btn');
-  const modalFootTech = document.getElementById('modal-tech-badges');
+  const overlay  = document.getElementById('project-modal');
+  const closeBtn = document.getElementById('modal-close-btn');
+  const track    = document.getElementById('carousel-track');
+  const dots     = document.getElementById('carousel-dots');
+  const counter  = document.getElementById('carousel-counter');
+  const prevBtn  = document.getElementById('carousel-prev');
+  const nextBtn  = document.getElementById('carousel-next');
 
   if (!overlay) return;
 
-  let currentIdx = 0;
-  let totalSlides = 0;
-  let touchStartX = 0;
-  let lastFocused = null;
+  let currentIdx = 0, totalSlides = 0, touchStartX = 0, lastFocused = null;
 
-  // Fermeture
   function closeModal() {
     overlay.classList.remove('open');
     overlay.setAttribute('aria-hidden', 'true');
@@ -404,123 +394,86 @@ function encodeProjectPath(path) {
   }
 
   closeBtn && closeBtn.addEventListener('click', closeModal);
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) closeModal();
-  });
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
 
-  // Clavier global
   document.addEventListener('keydown', e => {
     if (!overlay.classList.contains('open')) return;
-
-    if (e.key === 'Escape') closeModal();
+    if (e.key === 'Escape')     closeModal();
     if (e.key === 'ArrowLeft')  navigate(-1);
     if (e.key === 'ArrowRight') navigate(1);
   });
 
-  // Carrousel
   function navigate(dir) {
     if (totalSlides <= 1) return;
     currentIdx = (currentIdx + dir + totalSlides) % totalSlides;
     updateCarousel();
+    loadAllSlideImages();
   }
 
   function updateCarousel() {
-    if (!track) return;
-    track.style.transform = `translateX(-${currentIdx * 100}%)`;
-
-    // Compteur
+    if (track) track.style.transform = `translateX(-${currentIdx * 100}%)`;
     if (counter) counter.textContent = `${currentIdx + 1} / ${totalSlides}`;
+    if (dots) dots.querySelectorAll('.carousel-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === currentIdx));
+  }
 
-    // Points
-    if (dots) {
-      dots.querySelectorAll('.carousel-dot').forEach((d, i) => {
-        d.classList.toggle('active', i === currentIdx);
-      });
-    }
+  function loadAllSlideImages() {
+    track && track.querySelectorAll('img[data-src]').forEach(img => {
+      img.src = img.dataset.src;
+      img.removeAttribute('data-src');
+    });
   }
 
   prevBtn && prevBtn.addEventListener('click', () => navigate(-1));
   nextBtn && nextBtn.addEventListener('click', () => navigate(1));
 
-  // Touch / Swipe
   if (track) {
-    track.addEventListener('touchstart', e => {
-      touchStartX = e.touches[0].clientX;
-    }, { passive: true });
-
-    track.addEventListener('touchend', e => {
+    track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend',   e => {
       const delta = touchStartX - e.changedTouches[0].clientX;
-      if (Math.abs(delta) > 50) navigate(delta > 0 ? 1 : -1);
+      if (Math.abs(delta) > 48) navigate(delta > 0 ? 1 : -1);
     }, { passive: true });
   }
 
-  // Remplissage de la modale
   window.showProjectModal = function(project) {
     lastFocused = document.activeElement;
 
     // ── Carrousel ──
-    currentIdx = 0;
-    totalSlides = project.images.length > 0 ? project.images.length : 1;
+    currentIdx  = 0;
+    totalSlides = project.images && project.images.length > 0 ? project.images.length : 1;
 
     if (track) {
       track.innerHTML = '';
-
-      if (project.images.length === 0) {
-        // Placeholder
+      if (!project.images || project.images.length === 0) {
         const slide = document.createElement('div');
         slide.className = 'carousel-slide';
         slide.innerHTML = `
           <div class="carousel-placeholder">
-            <i class="fas fa-image" aria-hidden="true"></i>
+            <i class="fas fa-layer-group" aria-hidden="true"></i>
             <p>Images du projet à venir</p>
-          </div>
-        `;
+          </div>`;
         track.appendChild(slide);
       } else {
         project.images.forEach((imgPath, i) => {
           const slide = document.createElement('div');
           slide.className = 'carousel-slide';
-
           const img = document.createElement('img');
           img.alt = `${project.title} – capture ${i + 1}`;
-          // Lazy-loading : charger immédiatement la 1re, différer les autres
-          if (i === 0) {
-            img.src = encodeProjectPath(imgPath);
-          } else {
-            img.dataset.src = encodeProjectPath(imgPath);
-            img.setAttribute('loading', 'lazy');
-          }
+          if (i === 0) { img.src = encodeProjectPath(imgPath); }
+          else { img.dataset.src = encodeProjectPath(imgPath); img.setAttribute('loading', 'lazy'); }
           slide.appendChild(img);
           track.appendChild(slide);
         });
       }
     }
 
-    // Charger les images suivantes au moment de la navigation
-    function loadLazySlideImages() {
-      track && track.querySelectorAll('img[data-src]').forEach(img => {
-        img.src = img.dataset.src;
-        img.removeAttribute('data-src');
-      });
-    }
-
-    prevBtn && prevBtn.addEventListener('click', loadLazySlideImages, { once: true });
-    nextBtn && nextBtn.addEventListener('click', loadLazySlideImages, { once: true });
-
-    // Afficher/masquer boutons fléchés
+    // Boutons nav
     if (prevBtn && nextBtn) {
-      const show = totalSlides > 1;
-      prevBtn.style.display = show ? '' : 'none';
-      nextBtn.style.display = show ? '' : 'none';
+      prevBtn.style.display = totalSlides > 1 ? '' : 'none';
+      nextBtn.style.display = totalSlides > 1 ? '' : 'none';
     }
+    if (counter) { counter.textContent = `1 / ${totalSlides}`; counter.style.display = totalSlides > 1 ? '' : 'none'; }
 
-    // Compteur
-    if (counter) {
-      counter.textContent = `1 / ${totalSlides}`;
-      counter.style.display = totalSlides > 1 ? '' : 'none';
-    }
-
-    // Points indicateurs
     if (dots) {
       dots.innerHTML = '';
       if (totalSlides > 1) {
@@ -528,66 +481,96 @@ function encodeProjectPath(path) {
           const dot = document.createElement('button');
           dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
           dot.setAttribute('aria-label', `Diapositive ${i + 1}`);
-          dot.addEventListener('click', () => {
-            currentIdx = i;
-            updateCarousel();
-          });
+          dot.addEventListener('click', () => { currentIdx = i; updateCarousel(); });
           dots.appendChild(dot);
         }
       }
     }
-
     updateCarousel();
 
-    // ── Métadonnées ──
-    if (modalTitle) modalTitle.textContent = project.title;
+    // ── 4 blocs de contenu ──
+    const titleEl  = document.getElementById('modal-title');
+    const metaEl   = document.getElementById('modal-meta');
+    const ctxEl    = document.getElementById('modal-context');
+    const roleEl   = document.getElementById('modal-role');
+    const featEl   = document.getElementById('modal-features');
+    const techEl   = document.getElementById('modal-tech-badges');
+    const ghBtn    = document.getElementById('modal-github-btn');
 
-    if (modalMeta) {
-      const statusClass = project.status === 'En cours'
-        ? 'modal-badge-status-ongoing'
-        : 'modal-badge-status-done';
+    if (titleEl) titleEl.textContent = project.title;
 
-      modalMeta.innerHTML = `
+    if (metaEl) {
+      const sc = project.status === 'En cours' ? 'modal-badge-status-ongoing' : 'modal-badge-status-done';
+      metaEl.innerHTML = `
         <span class="modal-badge modal-badge-type">${project.type}</span>
-        <span class="modal-badge ${statusClass}">${project.status}</span>
-      `;
+        <span class="modal-badge ${sc}">${project.status}</span>`;
     }
 
-    if (modalDesc) modalDesc.textContent = project.description;
+    if (ctxEl)  ctxEl.textContent  = project.context  || '';
+    if (roleEl) roleEl.textContent = project.role || '';
 
-    if (modalKeys) {
-      modalKeys.innerHTML = project.keyPoints.map(kp => `
+    if (featEl) {
+      featEl.innerHTML = (project.features || []).map(f => `
         <div class="modal-keypoint">
           <i class="fas fa-check-circle" aria-hidden="true"></i>
-          <span>${kp}</span>
-        </div>
-      `).join('');
+          <span>${f}</span>
+        </div>`).join('');
     }
 
-    if (modalFootTech) {
-      modalFootTech.innerHTML = project.technologies.map(t =>
-        `<span class="tech-badge">${t}</span>`
-      ).join('');
+    if (techEl) {
+      techEl.innerHTML = (project.technologies || [])
+        .map(t => `<span class="tech-badge">${t}</span>`).join('');
     }
 
-    // Bouton GitHub (uniquement si lien renseigné)
-    if (modalGh) {
+    if (ghBtn) {
       if (project.githubUrl && project.githubUrl.trim() !== '') {
-        modalGh.href = project.githubUrl;
-        modalGh.style.display = '';
+        ghBtn.href = project.githubUrl;
+        ghBtn.style.display = '';
       } else {
-        modalGh.style.display = 'none';
+        ghBtn.style.display = 'none';
       }
     }
 
-    // Ouvrir
     overlay.classList.add('open');
     overlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-
-    // Focus sur le bouton de fermeture
     setTimeout(() => closeBtn && closeBtn.focus(), 50);
   };
+})();
+
+/* ══════════════════════════════════════════
+   11. HALO LUMINEUX SOURIS (desktop uniquement)
+══════════════════════════════════════════ */
+(function initMouseHalo() {
+  // Ne rien faire sur mobile / si prefers-reduced-motion
+  if (window.matchMedia('(max-width: 768px)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const halo = document.createElement('div');
+  halo.id = 'mouse-halo';
+  halo.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(halo);
+
+  let mx = -300, my = -300;
+  let cx = -300, cy = -300;
+  let raf;
+
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
+
+  function loop() {
+    // Lerp pour un suivi doux
+    cx += (mx - cx) * 0.1;
+    cy += (my - cy) * 0.1;
+    halo.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+    raf = requestAnimationFrame(loop);
+  }
+  loop();
+
+  // Pause quand la fenêtre est cachée
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) cancelAnimationFrame(raf);
+    else loop();
+  });
 })();
 
 /* ══════════════════════════════════════════

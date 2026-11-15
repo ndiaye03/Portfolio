@@ -1,205 +1,119 @@
 /* ============================================================
-   CSS/responsive.css — Responsive Mobile-First
-   Portfolio de Papa Aly Ndiaye
+   CSS/responsive.css — Mobile-First
+   Portfolio de Papa Aly Ndiaye (version améliorée)
    ============================================================ */
 
-/* ── Conteneur global max-width centré ── */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.25rem;
-}
-
 /* ══════════════════════════════════════════
-   MOBILE — Téléphones (<= 640px)
+   MOBILE — ≤ 640 px
 ══════════════════════════════════════════ */
 @media (max-width: 640px) {
-  :root {
-    --section-gap: 4rem;
-  }
+  :root { --section-gap: 4rem; }
 
   /* Navbar */
   .nav-links { display: none; }
-
-  .nav-burger {
-    display: flex;
-  }
+  .nav-burger { display: flex; }
 
   /* Hero */
-  .hero-avatar-ring {
-    width: 128px;
-    height: 128px;
-  }
-
-  .hero-actions {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hero-actions .btn {
-    width: 100%;
-    max-width: 280px;
-    justify-content: center;
-  }
+  .hero-avatar-ring { width: 170px; height: 170px; }
+  .hero-actions { flex-direction: column; align-items: center; }
+  .hero-actions .btn { width: 100%; max-width: 300px; justify-content: center; }
+  .hero-stats { gap: 0.75rem; }
+  .hero-stat { min-width: 80px; padding: 0.75rem 1rem; }
+  .hero-stat-num { font-size: 1.5rem; }
 
   /* À propos */
-  #about .about-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+  #about .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .about-numbers { grid-template-columns: 1fr 1fr; }
 
   /* Compétences */
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
+  .skills-grid { grid-template-columns: 1fr; }
+  .skill-tooltip { display: none; } /* évite débordement sur mobile */
 
   /* Projets */
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
+  .projects-grid { grid-template-columns: 1fr; }
 
   /* Modale */
-  .modal-box {
-    border-radius: var(--radius-lg);
-    max-height: 95vh;
-  }
-
-  .modal-carousel {
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  }
-
-  .modal-body {
-    padding: 1.25rem;
-  }
-
-  .modal-title {
-    font-size: 1.2rem;
-  }
-
-  .modal-footer {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  .modal-box { border-radius: var(--radius-lg); max-height: 95vh; }
+  .modal-carousel { border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+  .modal-body { padding: 1.25rem; }
+  .modal-title { font-size: 1.2rem; }
+  .modal-footer { flex-direction: column; align-items: flex-start; }
 
   /* Contact */
-  .contact-actions {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .contact-action-btn {
-    width: 100%;
-    max-width: 300px;
-    justify-content: center;
-  }
+  .contact-actions { flex-direction: column; align-items: center; }
+  .contact-action-btn { width: 100%; max-width: 320px; justify-content: center; }
 
   /* Section header */
-  .section-title {
-    font-size: 1.6rem;
-  }
+  .section-title { font-size: 1.6rem; }
 }
 
 /* ══════════════════════════════════════════
-   TABLETTES — (641px – 1024px)
+   TABLETTES — 641 px – 1024 px
 ══════════════════════════════════════════ */
 @media (min-width: 641px) and (max-width: 1024px) {
-  :root {
-    --section-gap: 5.5rem;
-  }
+  :root { --section-gap: 5.5rem; }
 
   /* Navbar */
   .nav-links { display: none; }
   .nav-burger { display: flex; }
 
   /* À propos */
-  #about .about-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+  #about .about-grid { grid-template-columns: 1fr; gap: 2rem; }
 
   /* Projets */
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
 
   /* Compétences */
-  .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .skills-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ══════════════════════════════════════════
-   DESKTOP — (> 1024px)
+   DESKTOP — > 1024 px
 ══════════════════════════════════════════ */
 @media (min-width: 1025px) {
-  /* Burger masqué */
   .nav-burger { display: none; }
   .nav-mobile { display: none !important; }
 
-  /* Navbar bien espacée */
-  #navbar {
-    padding: 0 3rem;
-  }
+  #navbar { padding: 0 3rem; }
 
-  /* Sections */
-  section {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
+  section { padding-left: 3rem; padding-right: 3rem; }
+  #skills { padding-left: 3rem; padding-right: 3rem; }
 
-  #skills {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
+  #about .about-grid { grid-template-columns: 1fr 1fr; align-items: start; }
 
-  /* À propos en 2 colonnes */
-  #about .about-grid {
-    grid-template-columns: 1fr 1fr;
+  /* Projets : 3 colonnes, dernière ligne centrée */
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+    /* On utilise auto-fill pour centrer naturellement avec justify-content */
+    justify-content: center;
+  }
+  /* Si la grille ne remplit pas toute la ligne, on centre */
+  #projects { display: grid; }
+  #projects .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
   }
 }
 
 /* ══════════════════════════════════════════
-   GRANDS ÉCRANS — (> 1440px)
+   GRANDS ÉCRANS — > 1440 px
 ══════════════════════════════════════════ */
 @media (min-width: 1440px) {
-  :root {
-    --section-gap: 8rem;
-  }
-
-  section {
-    max-width: 1280px;
-  }
-
-  .skills-inner {
-    max-width: 1280px;
-  }
+  :root { --section-gap: 8rem; }
+  section { max-width: 1280px; }
+  .skills-inner { max-width: 1280px; }
 }
 
 /* ══════════════════════════════════════════
-   TRÈS PETITS ÉCRANS — (< 360px)
+   TRÈS PETITS — < 360 px
 ══════════════════════════════════════════ */
 @media (max-width: 360px) {
-  :root {
-    --section-gap: 3.5rem;
-  }
-
-  .hero-name {
-    font-size: 1.75rem;
-  }
-
-  .hero-avatar-ring {
-    width: 110px;
-    height: 110px;
-  }
-
-  .btn {
-    padding: 0.6rem 1.1rem;
-    font-size: 0.84rem;
-  }
+  :root { --section-gap: 3.5rem; }
+  .hero-name { font-size: 1.75rem; }
+  .hero-avatar-ring { width: 140px; height: 140px; }
+  .btn { padding: 0.6rem 1.1rem; font-size: 0.84rem; }
+  .hero-stats { gap: 0.5rem; }
+  .hero-stat { min-width: 70px; padding: 0.6rem 0.75rem; }
 }
 
-/* ── Visibilité des nav-links selon breakpoint ── */
-@media (min-width: 1025px) {
-  .nav-links { display: flex; }
-}
+/* ── Nav-links visibles uniquement ≥ 1025 px ── */
+@media (min-width: 1025px) { .nav-links { display: flex; } }
