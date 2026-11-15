@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio de Papa Aly Ndiaye – Étudiant en Licence 3 Génie Logiciel à l'UIDT, développeur full-stack Laravel, React et Flask, passionné par l'IA et la data." />
+  <meta name="keywords" content="Papa Aly Ndiaye, développeur full-stack, Laravel, React, Flask, IA, data, Sénégal, portfolio, UIDT" />
+  <meta name="author" content="Papa Aly Ndiaye" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Papa Aly Ndiaye – Développeur Full-Stack" />
+  <meta property="og:description" content="Portfolio de Papa Aly Ndiaye, étudiant en L3 Génie Logiciel, développeur full-stack et passionné par l'IA." />
+  <meta property="og:image"       content="IMAGES/profil.jpeg" />
+
+  <title>Papa Aly Ndiaye – Développeur Full-Stack | Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 (icônes) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Devicon (icônes technologies) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
+
+  <!-- Feuilles de style -->
+  <link rel="stylesheet" href="CSS/style.css" />
+  <link rel="stylesheet" href="CSS/responsive.css" />
+</head>
+
+<body>
+
+  <!-- ══ Barre de lecture ══ -->
+  <div id="reading-progress" role="progressbar" aria-label="Progression de lecture" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <!-- ════════════════════════════════════════
+       NAVBAR
+  ════════════════════════════════════════ -->
+  <nav id="navbar" role="navigation" aria-label="Navigation principale">
+    <a href="#hero" class="nav-logo" aria-label="Accueil – Papa Aly Ndiaye">PAN</a>
+
+    <div class="nav-links" role="list">
+      <a href="#hero"     role="listitem">Accueil</a>
+      <a href="#about"    role="listitem">À propos</a>
+      <a href="#skills"   role="listitem">Compétences</a>
+      <a href="#projects" role="listitem">Projets</a>
+      <a href="#contact"  role="listitem">Contact</a>
+    </div>
+
+    <div class="nav-controls">
+      <button id="theme-toggle" aria-label="Changer le thème"></button>
+      <button class="nav-burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Menu mobile -->
+  <div class="nav-mobile" id="nav-mobile-menu" aria-label="Menu mobile">
+    <a href="#hero">Accueil</a>
+    <a href="#about">À propos</a>
+    <a href="#skills">Compétences</a>
+    <a href="#projects">Projets</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════ -->
+  <section id="hero" aria-label="Présentation">
+    <!-- Arrière-plan animé -->
+    <div class="hero-bg" aria-hidden="true">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-orb hero-orb-3"></div>
+    </div>
+
+    <div class="hero-content">
+      <!-- Photo de profil -->
+      <div class="hero-avatar-wrapper">
+        <div class="hero-avatar-ring">
+          <img
+            src="IMAGES/profil.jpeg"
+            alt="Photo de profil de Papa Aly Ndiaye"
+            width="160"
+            height="160"
+            onerror="this.parentNode.innerHTML='<div class=\'hero-avatar-fallback\' aria-hidden=\'true\'><i class=\'fas fa-user\'></i></div>'"
+          />
+        </div>
+        <span class="hero-badge">Disponible</span>
+      </div>
+
+      <!-- Nom & titre animé -->
+      <h1 class="hero-name">Papa Aly Ndiaye</h1>
+
+      <p class="hero-typewriter" aria-live="polite">
+        <span class="typewriter-text" aria-label="Développeur Full-Stack"></span>
+        <span class="typewriter-cursor" aria-hidden="true"></span>
+      </p>
+
+      <p class="hero-accroche">
+        Étudiant en L3 Génie Logiciel à l'UIDT · Passionné par l'IA & la Data ·
+        À la recherche d'un Master
+      </p>
+
+      <!-- Boutons d'action -->
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">
+          <i class="fas fa-rocket" aria-hidden="true"></i>Voir mes projets
+        </a>
+        <a href="#contact" class="btn btn-outline">
+          <i class="fas fa-paper-plane" aria-hidden="true"></i>Me contacter
+        </a>
+        <a href="cv_papa_aly_ndiaye.pdf" download class="btn btn-outline" aria-label="Télécharger le CV de Papa Aly Ndiaye (PDF)">
+          <i class="fas fa-download" aria-hidden="true"></i>Télécharger mon CV
+        </a>
+      </div>
+
+      <!-- Liens sociaux -->
+      <div class="hero-socials" aria-label="Réseaux sociaux">
+        <a href="https://github.com/ndiaye03"
+           target="_blank" rel="noopener noreferrer"
+           class="social-link"
+           aria-label="GitHub de Papa Aly Ndiaye">
+          <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+        <a href="https://linkedin.com/in/papa-aly-ndiaye-228ba8374"
+           target="_blank" rel="noopener noreferrer"
+           class="social-link"
+           aria-label="LinkedIn de Papa Aly Ndiaye">
+          <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+        </a>
+        <a href="https://wa.me/221772639136"
+           target="_blank" rel="noopener noreferrer"
+           class="social-link"
+           aria-label="WhatsApp de Papa Aly Ndiaye">
+          <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        </a>
+        <a href="mailto:papalyndiaye0@gmail.com"
+           class="social-link"
+           aria-label="Envoyer un e-mail à Papa Aly Ndiaye">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <!-- Invite de défilement -->
+      <div class="hero-scroll-hint" aria-hidden="true">
+        <span>Défiler</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       À PROPOS
+  ════════════════════════════════════════ -->
+  <section id="about" aria-label="À propos de moi">
+    <div class="section-header reveal">
+      <span class="section-label">Qui suis-je ?</span>
+      <h2 class="section-title">À propos de moi</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="about-grid">
+      <!-- Colonne gauche : profil + frise -->
+      <div>
+        <div class="card-glass reveal" style="padding: 2rem; margin-bottom: 2rem;">
+          <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:1rem; color:var(--text-primary);">Mon profil</h3>
+          <p class="about-profile-text">
+            Étudiant en Licence 3 Génie logiciel à l'Université Iba Der Thiam de Thiès (UIDT), je conçois et développe
+            des applications web full-stack, de l'enquête de terrain et de la modélisation UML jusqu'à la mise en
+            œuvre, en équipe sous Git.
+          </p>
+          <p class="about-profile-text" style="margin-top:0.75rem;">
+            Attiré par l'intelligence artificielle et l'exploitation des données, je candidate en Master pour consolider
+            mes bases en ingénierie logicielle et me spécialiser dans ces domaines.
+          </p>
+        </div>
+
+        <!-- Frise chronologique -->
+        <div class="reveal delay-1">
+          <h3 style="font-size:0.8rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-muted); margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem;">
+            <i class="fas fa-graduation-cap" style="color:var(--accent-teal);" aria-hidden="true"></i>Formation
+          </h3>
+          <div class="timeline" aria-label="Parcours académique">
+            <div class="timeline-item">
+              <div class="timeline-dot" aria-hidden="true"></div>
+              <div class="timeline-year">2025 – 2026</div>
+              <div class="timeline-title">Licence 3 – Génie Logiciel <span style="color:var(--accent-teal); font-size:0.78rem;">(en cours)</span></div>
+              <div class="timeline-sub">Université Iba Der Thiam de Thiès (UIDT), Sénégal</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot" aria-hidden="true"></div>
+              <div class="timeline-year">2024 – 2025</div>
+              <div class="timeline-title">Licence 2 – Informatique</div>
+              <div class="timeline-sub">UIDT, Thiès, Sénégal</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot" aria-hidden="true"></div>
+              <div class="timeline-year">2023 – 2024</div>
+              <div class="timeline-title">Licence 1 – Informatique</div>
+              <div class="timeline-sub">UIDT, Thiès, Sénégal</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot" aria-hidden="true"></div>
+              <div class="timeline-year">2022 – 2023</div>
+              <div class="timeline-title">Baccalauréat Scientifique S2</div>
+              <div class="timeline-sub">Lycée Sagatta Djoloff, Sénégal</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colonne droite : langues + intérêts -->
+      <div class="about-extras">
+        <!-- Langues -->
+        <div class="about-extra-block card-glass reveal delay-2" style="padding: 1.75rem;">
+          <h3>
+            <i class="fas fa-language" aria-hidden="true"></i>Langues
+          </h3>
+          <div class="tags-wrap">
+            <span class="tag lang-level">
+              <i class="fas fa-circle" style="font-size:0.5rem; color:#22c55e;" aria-hidden="true"></i>
+              Français — Courant
+            </span>
+            <span class="tag lang-level">
+              <i class="fas fa-circle" style="font-size:0.5rem; color:#fbbf24;" aria-hidden="true"></i>
+              Anglais — Intermédiaire
+            </span>
+            <span class="tag lang-level">
+              <i class="fas fa-circle" style="font-size:0.5rem; color:#14b8a6;" aria-hidden="true"></i>
+              Wolof — Langue maternelle
+            </span>
+          </div>
+        </div>
+
+        <!-- Centres d'intérêt -->
+        <div class="about-extra-block card-glass reveal delay-3" style="padding: 1.75rem;">
+          <h3>
+            <i class="fas fa-heart" aria-hidden="true"></i>Centres d'intérêt
+          </h3>
+          <div class="tags-wrap">
+            <span class="tag"><i class="fas fa-code" aria-hidden="true"></i>Programmation</span>
+            <span class="tag"><i class="fas fa-futbol" aria-hidden="true"></i>Sport</span>
+            <span class="tag"><i class="fas fa-book" aria-hidden="true"></i>Lecture</span>
+            <span class="tag"><i class="fas fa-gamepad" aria-hidden="true"></i>Jeux vidéo</span>
+          </div>
+        </div>
+
+        <!-- Localisation -->
+        <div class="about-extra-block card-glass reveal delay-4" style="padding: 1.75rem;">
+          <h3>
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>Localisation
+          </h3>
+          <div class="tags-wrap">
+            <span class="tag"><i class="fas fa-city" aria-hidden="true"></i>Dakar, Sénégal</span>
+            <span class="tag"><i class="fas fa-university" aria-hidden="true"></i>UIDT, Thiès</span>
+            <span class="tag"><i class="fas fa-globe-africa" aria-hidden="true"></i>Afrique de l'Ouest</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       COMPÉTENCES
+  ════════════════════════════════════════ -->
+  <section id="skills" aria-label="Compétences techniques">
+    <div class="skills-inner">
+      <div class="section-header reveal">
+        <span class="section-label">Ce que je sais faire</span>
+        <h2 class="section-title">Compétences</h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle">Niveaux indicatifs basés sur ma pratique et mes projets réalisés.</p>
+      </div>
+
+      <!-- Les cartes sont générées par JS/main.js via buildSkills() -->
+      <div id="skills-container" class="skills-grid" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       PROJETS
+  ════════════════════════════════════════ -->
+  <section id="projects" aria-label="Mes projets">
+    <div class="section-header reveal">
+      <span class="section-label">Ce que j'ai construit</span>
+      <h2 class="section-title">Projets</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Cliquez sur une carte pour découvrir les détails, captures d'écran et technologies.</p>
+    </div>
+
+    <!-- Les cartes sont générées par JS/main.js via buildProjects() -->
+    <div id="projects-grid" class="projects-grid" aria-live="polite"></div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       MODALE PROJET
+  ════════════════════════════════════════ -->
+  <div
+    id="project-modal"
+    class="modal-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    aria-hidden="true"
+  >
+    <div class="modal-box">
+      <!-- Carrousel -->
+      <div class="modal-carousel" aria-label="Galerie d'images du projet">
+        <div id="carousel-track" class="carousel-track"></div>
+
+        <button id="carousel-prev" class="carousel-btn carousel-btn-prev" aria-label="Image précédente">
+          <i class="fas fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <button id="carousel-next" class="carousel-btn carousel-btn-next" aria-label="Image suivante">
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </button>
+
+        <div id="carousel-counter" class="carousel-counter" aria-live="polite"></div>
+        <div id="carousel-dots" class="carousel-dots" aria-label="Navigation par diapositive"></div>
+      </div>
+
+      <!-- Corps de la modale -->
+      <div class="modal-body">
+        <div class="modal-header">
+          <div>
+            <div id="modal-meta" class="modal-meta"></div>
+            <h2 id="modal-title" class="modal-title"></h2>
+          </div>
+          <button id="modal-close-btn" class="modal-close" aria-label="Fermer la fenêtre">
+            <i class="fas fa-times" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <p class="modal-section-title">Description</p>
+        <p id="modal-description" class="modal-description"></p>
+
+        <p class="modal-section-title">Points clés</p>
+        <div id="modal-keypoints" class="modal-keypoints"></div>
+
+        <div class="modal-footer">
+          <div>
+            <p class="modal-section-title" style="margin-bottom:0.5rem;">Technologies</p>
+            <div id="modal-tech-badges" class="tech-badges"></div>
+          </div>
+          <a
+            id="modal-github-btn"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary"
+            aria-label="Voir le code source sur GitHub"
+          >
+            <i class="fab fa-github" aria-hidden="true"></i>Voir sur GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       CONTACT
+  ════════════════════════════════════════ -->
+  <section id="contact" aria-label="Contact">
+    <div class="section-header reveal">
+      <span class="section-label">Restons en contact</span>
+      <h2 class="section-title">Me contacter</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="card-glass reveal delay-1" style="padding:3rem 2rem; max-width:640px; margin:0 auto; text-align:center;">
+      <div style="font-size:3rem; margin-bottom:1rem;" aria-hidden="true">👋</div>
+      <p class="contact-invite">
+        Vous avez un projet, une opportunité de stage ou souhaitez simplement échanger ?
+        N'hésitez pas à me contacter — je réponds rapidement.
+      </p>
+
+      <div class="contact-actions">
+        <a href="mailto:papalyndiaye0@gmail.com" class="contact-action-btn" aria-label="Envoyer un e-mail">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+          papalyndiaye0@gmail.com
+        </a>
+        <a href="https://wa.me/221772639136" target="_blank" rel="noopener noreferrer" class="contact-action-btn" aria-label="Envoyer un message WhatsApp">
+          <i class="fab fa-whatsapp" aria-hidden="true"></i>
+          +221 77 263 91 36
+        </a>
+        <a href="tel:+221772639136" class="contact-action-btn" aria-label="Appeler Papa Aly Ndiaye">
+          <i class="fas fa-phone" aria-hidden="true"></i>
+          Appeler
+        </a>
+        <a href="https://linkedin.com/in/papa-aly-ndiaye-228ba8374" target="_blank" rel="noopener noreferrer" class="contact-action-btn" aria-label="Profil LinkedIn">
+          <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════ -->
+  <footer>
+    <nav class="footer-socials" aria-label="Liens sociaux du pied de page">
+      <a href="https://wa.me/221772639136" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+      </a>
+      <a href="https://github.com/ndiaye03" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      <a href="https://linkedin.com/in/papa-aly-ndiaye-228ba8374" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+      </a>
+      <a href="mailto:papalyndiaye0@gmail.com" class="footer-social" aria-label="Gmail">
+        <i class="fas fa-envelope" aria-hidden="true"></i>
+      </a>
+      <a href="tel:+221772639136" class="footer-social" aria-label="Téléphone">
+        <i class="fas fa-phone" aria-hidden="true"></i>
+      </a>
+    </nav>
+
+    <p class="footer-copy">
+      &copy; 2026 <span>Papa Aly Ndiaye</span> · Fait avec passion au Sénégal 🇸🇳
+    </p>
+  </footer>
+
+  <!-- ══ Scripts (données d'abord, puis main) ══ -->
+  <script src="JS/skills-data.js"></script>
+  <script src="JS/projects-data.js"></script>
+  <script src="JS/main.js"></script>
+
+</body>
+</html>
