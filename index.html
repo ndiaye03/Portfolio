@@ -3,17 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio de Papa Aly Ndiaye – Étudiant en Licence 3 Génie Logiciel à l'UIDT, développeur full-stack Laravel, React et Flask, passionné par l'IA et la data." />
-  <meta name="keywords" content="Papa Aly Ndiaye, développeur full-stack, Laravel, React, Flask, IA, data, Sénégal, portfolio, UIDT" />
+  <meta name="description" content="Portfolio de Papa Aly Ndiaye – Étudiant en informatique (Licence 3 Génie logiciel à l'UIDT, Sénégal), futur ingénieur en génie logiciel ou en IA et données." />
+  <meta name="keywords" content="Papa Aly Ndiaye, génie logiciel, intelligence artificielle, IA, données, full-stack, UIDT, Sénégal, portfolio, informatique" />
   <meta name="author" content="Papa Aly Ndiaye" />
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website" />
-  <meta property="og:title"       content="Papa Aly Ndiaye – Développeur Full-Stack" />
-  <meta property="og:description" content="Portfolio de Papa Aly Ndiaye, étudiant en L3 Génie Logiciel, développeur full-stack et passionné par l'IA." />
+  <meta property="og:title"       content="Papa Aly Ndiaye | Étudiant en informatique, futur ingénieur logiciel" />
+  <meta property="og:description" content="Portfolio de Papa Aly Ndiaye, étudiant en Licence 3 Génie logiciel à l'UIDT, futur ingénieur en génie logiciel ou en IA et données." />
   <meta property="og:image"       content="IMAGES/profil.jpeg" />
 
-  <title>Papa Aly Ndiaye – Développeur Full-Stack | Portfolio</title>
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Papa Aly Ndiaye | Étudiant en informatique, futur ingénieur logiciel" />
+  <meta name="twitter:description" content="Portfolio de Papa Aly Ndiaye, étudiant en Licence 3 Génie logiciel à l'UIDT, futur ingénieur en génie logiciel ou en IA et données." />
+  <meta name="twitter:image"       content="IMAGES/profil.jpeg" />
+
+  <title>Papa Aly Ndiaye | Étudiant en informatique, futur ingénieur logiciel</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -91,19 +97,18 @@
           />
         </div>
         <!-- Badge sous la photo → ne couvre plus le visage -->
-        <span class="hero-badge">À la recherche d'un Master</span>
+        <span class="hero-badge"><span class="badge-dot" aria-hidden="true"></span>Disponible</span>
       </div>
 
       <h1 class="hero-name">Papa Aly Ndiaye</h1>
 
       <p class="hero-typewriter" aria-live="polite">
-        <span class="typewriter-text" aria-label="Étudiant en Génie logiciel"></span>
+        <span class="typewriter-text" aria-label="Étudiant en informatique"></span>
         <span class="typewriter-cursor" aria-hidden="true"></span>
       </p>
 
       <p class="hero-accroche">
-        Étudiant en L3 Génie Logiciel à l'UIDT · Développeur full-stack (Laravel, React, Flask) ·
-        Passionné par l'IA et l'exploitation des données
+        Étudiant en L3 Génie logiciel à l'UIDT · Passionné par l'IA et la Data
       </p>
 
       <!-- Boutons d'action -->
@@ -114,8 +119,8 @@
         <a href="#contact" class="btn btn-outline">
           <i class="fas fa-paper-plane" aria-hidden="true"></i>Me contacter
         </a>
-        <a href="cv_papa_aly_ndiaye.pdf" download class="btn btn-outline" aria-label="Télécharger le CV de Papa Aly Ndiaye (PDF)">
-          <i class="fas fa-download" aria-hidden="true"></i>Télécharger mon CV
+        <a href="HTML/cv.html" class="btn btn-outline" id="btn-consult-cv" aria-label="Consulter mon CV">
+          <i class="fas fa-file-alt" aria-hidden="true"></i>Consulter CV
         </a>
       </div>
 
@@ -181,13 +186,7 @@
         <div class="card-glass reveal" style="padding: 2rem; margin-bottom: 2rem;">
           <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:1rem;">Mon profil</h3>
           <p class="about-profile-text">
-            Étudiant en Licence 3 Génie logiciel à l'Université Iba Der Thiam de Thiès (UIDT), je conçois et développe
-            des applications web full-stack, de l'enquête de terrain et de la modélisation UML jusqu'à la mise en
-            œuvre, en équipe sous Git.
-          </p>
-          <p class="about-profile-text" style="margin-top:0.75rem;">
-            Attiré par l'intelligence artificielle et l'exploitation des données, je candidate en Master pour consolider
-            mes bases en ingénierie logicielle et me spécialiser dans ces domaines.
+            Étudiant en Licence 3 Génie logiciel à l'Université Iba Der Thiam de Thiès, je conçois et développe des applications web, de l'enquête de terrain et de la modélisation UML jusqu'à la mise en œuvre, en équipe sous Git. Je m'oriente vers le génie logiciel ainsi que vers l'intelligence artificielle et l'exploitation des données.
           </p>
         </div>
 
@@ -260,24 +259,21 @@
           </div>
         </div>
 
-        <!-- Ce que je recherche (remplace Localisation) -->
+        <!-- Mon orientation -->
         <div class="about-extra-block card-glass reveal delay-4" style="padding:1.75rem;">
-          <h3><i class="fas fa-bullseye" aria-hidden="true"></i>Ce que je recherche</h3>
-          <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:0.9rem;">
-            Master en France dans l'un des domaines suivants :
-          </p>
+          <h3><i class="fas fa-compass" aria-hidden="true"></i>Mon orientation</h3>
           <div class="objective-list">
             <div class="objective-item">
-              <i class="fas fa-brain" aria-hidden="true"></i>
-              <span>Intelligence artificielle et apprentissage automatique</span>
-            </div>
-            <div class="objective-item">
-              <i class="fas fa-database" aria-hidden="true"></i>
-              <span>Science des données et exploitation de données massives</span>
-            </div>
-            <div class="objective-item">
               <i class="fas fa-layer-group" aria-hidden="true"></i>
-              <span>Développement full-stack et ingénierie logicielle avancée</span>
+              <span>Génie logiciel (conception et architecture d'applications)</span>
+            </div>
+            <div class="objective-item">
+              <i class="fas fa-brain" aria-hidden="true"></i>
+              <span>IA et données (analyse et exploitation des données)</span>
+            </div>
+            <div class="objective-item">
+              <i class="fas fa-code-branch" aria-hidden="true"></i>
+              <span>Projets concrets réalisés en équipe et en autonomie</span>
             </div>
           </div>
         </div>
@@ -435,7 +431,7 @@
       </div>
 
       <p class="contact-invite">
-        Un projet, une opportunité de stage ou d'alternance, ou une question sur mon parcours ?
+        Un projet, une opportunité de stage ou de collaboration, ou une question sur mon parcours ?
         Écrivez-moi.
       </p>
 

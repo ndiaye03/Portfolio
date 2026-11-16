@@ -14,8 +14,11 @@
  *   9.  Génération des cartes projets (placeholder soigné)
  *   10. Modale projet (4 blocs + carrousel complet)
  *   11. Halo lumineux souris (désactivé sur mobile)
+ *   12. Consultation du CV (page dédiée et téléchargement)
  * ─────────────────────────────────────────────────────────────
  */
+
+const CV_PATH = "cv_papa_aly_ndiaye.pdf";
 
 /* ══════════════════════════════════════════
    1. THÈME CLAIR / SOMBRE
@@ -113,8 +116,8 @@
   if (!el) return;
 
   const phrases = [
-    'Étudiant en Génie logiciel',
-    'Développeur full-stack',
+    'Étudiant en informatique',
+    'Futur ingénieur en génie logiciel',
     'Futur ingénieur IA et données'
   ];
 
@@ -571,6 +574,16 @@ function encodeProjectPath(path) {
     if (document.hidden) cancelAnimationFrame(raf);
     else loop();
   });
+})();
+
+/* ══════════════════════════════════════════
+   12. GESTION DU LIEN VERS LE CV
+══════════════════════════════════════════ */
+(function initCVLinks() {
+  const btnConsultCV = document.getElementById('btn-consult-cv');
+  if (btnConsultCV) {
+    btnConsultCV.setAttribute('href', 'HTML/cv.html');
+  }
 })();
 
 /* ══════════════════════════════════════════
